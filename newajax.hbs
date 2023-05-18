@@ -1,0 +1,44 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>">
+<script>
+    $().ready(()=>{
+        $("#i2").click(()=>{
+            $.get("http://localhost:4000/ajax",(res)=>{
+                $("#p1").html(`<h3>${res.ans}</h3>`)
+            })
+        })
+
+
+        $("#i2").click(()=>{
+            let x=$("#i1").val()
+            let obj={o:x}
+
+            $.ajax({
+                url :"http://localhost:4000/cub",
+                type:"POST",
+                data :JSON.stringify(obj),
+                success :function(res){
+                    $("#p2").html(`<h4> Cube  of ${x} is ${res.cube}</h4>`)
+                },
+                beforeSend : function(req){
+                    req.setRequestHeader("Content-Type","application/json")
+                }
+
+
+            })
+        })
+
+
+
+    })
+
+</script>
+
+
+<body>
+    <input type="number" placeholder="Number" id="i1"/>
+    <input type="button" value="Submit" id="i2"/>
+    <P id="p1"></P>
+    <p id="p2"></p>
+</body>
+</html>

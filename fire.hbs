@@ -1,0 +1,26 @@
+<html>
+
+
+    <script>
+            function call(){
+                let x=document.getElementById("i1").value
+                let obj={o:x}
+                let http= new XMLHttpRequest()
+                http.onload=function(){
+                    let job=JSON.parse(http.response)
+                    document.getElementById("p1").innerHTML=`<h4> Cube of ${x} is ${job.cube}</h4>`
+                }
+                http.open("POST","http://localhost:4000/cub")
+                http.setRequestHeader("Content-Type","application/json")
+                http.send(JSON.stringify(obj))
+
+            }
+
+    </script>
+    <body>
+         <input type="number" placeholder="Number" id="i1" />
+        <input type="button" value="Submit" id="i2"  onclick="call()"/>
+        <P id="p1"></P>
+        <p id="p2"></p>
+    </body>
+</html>
